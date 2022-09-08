@@ -17,6 +17,7 @@
     "gen:version": "tsx scripts/gen-version.ts",
     "diff:table": "tsx scripts/build-table.ts",
     "update:version": "tsx scripts/update-version.ts",
+    "?clean": "注释：-r 表示递归,当前工程中的'theme-chalk'目录也会执行clean命令，也会被清理 https://www.pnpm.cn/cli/exec#--recursive--r ，--parallel 表示平行执行 https://www.pnpm.cn/cli/exec#--parallel",
     "clean": "pnpm run clean:dist && pnpm run -r --parallel clean",
     "clean:dist": "rimraf dist",
     "build": "pnpm run -C internal/build start",

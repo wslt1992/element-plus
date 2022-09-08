@@ -14,7 +14,9 @@ import { buildConfigEntries, target } from '../build-info'
 import type { OutputOptions } from 'rollup'
 
 export const buildModules = async () => {
+  /* 入口文件，并排除了node-module,dist等目录*/
   const input = excludeFiles(
+    /* 查找文件，工作目录element-plus/packages */
     await glob('**/*.{js,ts,vue}', {
       cwd: pkgRoot,
       absolute: true,

@@ -1,6 +1,8 @@
 import { resolve } from 'path'
 
+/*根目录element-plus*/
 export const projRoot = resolve(__dirname, '..', '..', '..')
+/* element-plus/packages */
 export const pkgRoot = resolve(projRoot, 'packages')
 export const compRoot = resolve(pkgRoot, 'components')
 export const themeRoot = resolve(pkgRoot, 'theme-chalk')
@@ -9,6 +11,7 @@ export const localeRoot = resolve(pkgRoot, 'locale')
 export const directiveRoot = resolve(pkgRoot, 'directives')
 export const epRoot = resolve(pkgRoot, 'element-plus')
 export const utilRoot = resolve(pkgRoot, 'utils')
+/* element-plus/internal/build */
 export const buildRoot = resolve(projRoot, 'internal', 'build')
 
 // Docs

@@ -61,8 +61,11 @@ export default defineConfig(async ({ mode }) => {
       esbuildPlugin(),
       vueJsx(),
       DefineOptions(),
+      /* 关键点：自动按需要注册组件，*/
       Components({
+        /*需要被转化的目录*/
         include: `${__dirname}/**`,
+        /*ElementPlusResolver用于解决elementPlus组件注册问题*/
         resolvers: ElementPlusResolver({ importStyle: 'sass' }),
         dts: false,
       }),

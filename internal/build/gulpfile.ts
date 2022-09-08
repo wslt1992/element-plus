@@ -42,12 +42,30 @@ export const copyFullStyle = async () => {
     path.resolve(epOutput, 'dist/index.css')
   )
 }
-
+/*series：将等待前一个任务完成，在执行后一个
+ * parallel：任务将平行执行
+ * */
 export default series(
+  /*
+   * withTaskName的作用，函数fn添加displayName属性，然后返回fn
+   * */
+  /*执行清理，清理dist文件夹*/
   withTaskName('clean', () => run('pnpm run clean')),
+  /* 创建/dist/element-plus目录 */
   withTaskName('createOutput', () => mkdir(epOutput, { recursive: true })),
 
   parallel(
+    /*
+    这里的任务定义在，src/task目录中，gulp.js（当前文件）引入后抛出，如下
+    * export * from './src' (文件最后一行)
+    * */
+
+    /*runTask执行过程，
+     * runTask(buildModules)
+     * --> spawn(pnpm run start buildModules)
+     * --> gulp  gulpfile.ts buildModules
+     * --> 最终调用到当前gulp文件的 buildModules
+     * */
     runTask('buildModules'),
     runTask('buildFullBundle'),
     runTask('generateTypesDefinitions'),
