@@ -27,23 +27,42 @@ export const buildModules = async () => {
     input,
     plugins: [
       ElementPlusAlias(),
+
+      // 在setup语法下，写option语法
+      // https://github.com/sxzz/unplugin-vue-macros/blob/HEAD/packages/define-options/README-zh-CN.md
       DefineOptions(),
+
+      // 提供 Vue 3 单文件组件支持
+      // https://github.com/vitejs/vite/tree/main/packages/plugin-vue
       vue({
         isProduction: false,
       }),
+
+      // 供 Vue 3 JSX 支持（通过 专用的 Babel 转换插件）
+      // https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx
       vueJsx(),
+
+      // 处理本地和第三方模块对 node_module的依赖
+      // https://github.com/rollup/plugins/tree/master/packages/node-resolve
       nodeResolve({
         extensions: ['.mjs', '.js', '.json', '.ts'],
       }),
+      // 转换commonjs ==> esm，（打包过程中，依赖的第三方模块可能是commonjs格式）
+      // https://github.com/rollup/plugins/tree/master/packages/commonjs
       commonjs(),
+
+      // 最快的 TS/ESNext ==> ES6 编译器和压缩器
+      // https://www.npmjs.com/package/rollup-plugin-esbuild
       esbuild({
         sourceMap: true,
         target,
         loaders: {
+          // '.vue' 文件，开启对ts的支持
           '.vue': 'ts',
         },
       }),
     ],
+    // generateExternal : 读取package.json-> {dependencies、peerDependencies},将读取到的字段添加到external
     external: await generateExternal({ full: false }),
     treeshake: false,
   })
