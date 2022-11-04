@@ -66,10 +66,12 @@ export default defineComponent({
 
       const type = props.type || 'default'
       const sortable = props.sortable === '' ? true : props.sortable
+      /*defaults.property 确定的当前列对应的数据字段名*/
       const defaults = {
         ...cellStarts[type],
         id: columnId.value,
         type,
+        /*确定的当前列对应的数据字段名*/
         property: props.prop || props.property,
         align: realAlign,
         headerAlign: realHeaderAlign,
@@ -123,7 +125,6 @@ export default defineComponent({
       )
       column = chains(column)
       columnConfig.value = column
-
       // 注册 watcher
       registerNormalWatchers()
       registerComplexWatchers()
@@ -138,6 +139,7 @@ export default defineComponent({
       columnConfig.value.getColumnIndex = getColumnIndex
       const columnIndex = getColumnIndex()
       columnIndex > -1 &&
+        /* 设置列数据到store。在后面每列数据渲染时，需要用到，位置：packages/components/table/src/table-body/render-helper.ts:136*/
         owner.value.store.commit(
           'insertColumn',
           columnConfig.value,

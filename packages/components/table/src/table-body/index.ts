@@ -63,6 +63,7 @@ export default defineComponent({
   },
   render() {
     const { wrappedRowRender, store } = this
+    // table每行的渲染过程
     const data = store.states.data.value || []
     return h('tbody', {}, [
       data.reduce((acc: VNode[], row) => {

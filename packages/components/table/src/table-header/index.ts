@@ -189,6 +189,7 @@ export default defineComponent({
                         : '',
                     ],
                   },
+                  /*依据store.column中的数据渲染每行*/
                   [
                     column.renderHeader
                       ? column.renderHeader({

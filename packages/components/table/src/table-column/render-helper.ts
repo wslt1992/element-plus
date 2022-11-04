@@ -108,6 +108,7 @@ function useRender<T>(
       }
     }
   }
+  /* 每列的渲染，*/
   const setColumnRenders = (column: TableColumnCtx<T>) => {
     // renderHeader 属性不推荐使用。
     if (props.renderHeader) {
@@ -118,8 +119,10 @@ function useRender<T>(
     } else if (column.type !== 'selection') {
       column.renderHeader = (scope) => {
         // help render
+        /* 使用label从绑定的数据中获取value*/
         instance.columnConfig.value['label']
         const renderHeader = slots.header
+        /* 自定义渲染header*/
         return renderHeader ? renderHeader(scope) : column.label
       }
     }
@@ -144,6 +147,7 @@ function useRender<T>(
       // 对 renderCell 进行包装
       column.renderCell = (data) => {
         let children = null
+        /*这里可能是 自定义列 的渲染*/
         if (slots.default) {
           const vnodes = slots.default(data)
           children = vnodes.some((v) => v.type !== Comment)

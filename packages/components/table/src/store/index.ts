@@ -70,6 +70,7 @@ function useStore<T>() {
       }
     },
 
+    /*设置列数据到store*/
     insertColumn(
       states: StoreStates,
       column: TableColumnCtx<T>,
